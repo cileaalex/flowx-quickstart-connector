@@ -1,0 +1,40 @@
+logging:
+  level:
+    ROOT: INFO
+    ai.flowx.quickstart.connector: INFO
+    io.netty: INFO
+    reactor.netty: INFO
+    jdk.event.security: INFO
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: currency exchange
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+      fail-on-empty-beans: false
+
+application:
+  jaeger:
+    enabled: true
+    prefix: exchange
+
+management:
+  health:
+    kafka.enabled: true
+
+orchestratorgettoken-api:
+  scheme: https
+  host: account.uipath.com
+  path: account.uipath.com/oauth/token
+
+
+spring.config.import: application-management.yml, application-kafka.yml
+---
+spring.config.activate.on-profile: dev
+
+logging.level.ROOT: DEBUG
+logging.level.ai.flowx.quickstart.connector: DEBUG
